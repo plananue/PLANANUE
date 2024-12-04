@@ -8,24 +8,25 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      overflow: hidden; /* 스크롤 바 숨김 */
+      overflow: hidden; /* 스크롤 숨김 */
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      position: relative;
     }
     section {
       height: 100vh;
       width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      scroll-snap-align: start; /* 각 섹션의 스냅 포인트 */
-    }
-    .container {
-      scroll-snap-type: y mandatory; /* 세로 방향 스냅 */
-      overflow-y: scroll;
-      height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: transform 0.8s ease-in-out;
     }
     header {
       display: flex;
-      justify-content: center; /* 상단 요소를 중앙 정렬 */
+      justify-content: center;
       align-items: center;
       padding: 0 20px;
       height: 80px;
@@ -42,7 +43,7 @@
       left: 20px;
     }
     .logo img {
-      height: 50px; /* 로고 이미지 높이 설정 */
+      height: 50px;
       width: auto;
     }
     nav ul {
@@ -92,21 +93,27 @@
       font-size: 48px;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     }
-    .section {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #f4f4f4;
-      font-size: 24px;
-      color: #333;
+    .image-section {
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
-    footer {
-      height: 100px;
+    .image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #222;
+      background: rgba(0, 0, 0, 0.4); /* 이미지 위에 반투명 오버레이 */
+    }
+    .image-overlay h1 {
       color: white;
+      font-size: 36px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     }
   </style>
 </head>
@@ -114,19 +121,17 @@
   <header>
     <!-- 로고 -->
     <div class="logo">
-      <img src="https://drive.google.com/file/d/1Fvq1tI2ed6P3KgogaAGhXUTva6-6M1nK/view?usp=sharing" alt="로고 이미지"> <!-- 로고 이미지 경로를 여기에 입력 -->
+      <img src="logo.png" alt="로고 이미지">
     </div>
     <nav>
       <ul>
         <li><a href="#about">About</a></li>
         <li><a href="#work">Work</a></li>
-        <li><a href="#archive">Archive</a></li>
-        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
   
-  <div class="container">
+  <div class="container" id="container">
     <!-- 첫 번째 섹션: 동영상 -->
     <section class="video-section">
       <video autoplay muted loop>
@@ -138,21 +143,44 @@
       </div>
     </section>
     
-    <!-- 두 번째 섹션 -->
-    <section class="section" id="about">
-      About Section Content
+    <!-- 두 번째 섹션: 이미지 배경 -->
+    <section class="image-section" style="background-image: url('image1.jpg');">
+      <div class="image-overlay">
+        <h1>두 번째 섹션 콘텐츠</h1>
+      </div>
     </section>
     
-    <!-- 세 번째 섹션 -->
-    <section class="section" id="work">
-      Work Section Content
+    <!-- 세 번째 섹션: 이미지 배경 -->
+    <section class="image-section" style="background-image: url('image2.jpg');">
+      <div class="image-overlay">
+        <h1>세 번째 섹션 콘텐츠</h1>
+      </div>
     </section>
-
-    
-    <!-- Footer -->
-    <footer>
-      © 2024 Your Company Name. All Rights Reserved.
-    </footer>
   </div>
+
+  <script>
+    const container = document.getElementById('container');
+    const sections = document.querySelectorAll('section');
+    let currentSection = 0;
+
+    // 키보드로 섹션 슬라이드
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown') {
+        navigateSection(1);
+      } else if (e.key === 'ArrowUp') {
+        navigateSection(-1);
+      }
+    });
+
+    function navigateSection(direction) {
+      const maxSections = sections.length;
+      const nextSection = currentSection + direction;
+
+      if (nextSection >= 0 && nextSection < maxSections) {
+        currentSection = nextSection;
+        container.style.transform = `translateY(-${currentSection * 100}vh)`;
+      }
+    }
+  </script>
 </body>
 </html>
