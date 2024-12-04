@@ -1,186 +1,141 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>기업 홈페이지</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      overflow: hidden; /* 스크롤 숨김 */
-    }
-    .container {
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      position: relative;
-    }
-    section {
-      height: 100vh;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      transition: transform 0.8s ease-in-out;
-    }
-    header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0 20px;
-      height: 80px;
-      background-color: rgba(248, 248, 248, 0.9);
-      border-bottom: 1px solid #ddd;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-    }
-    .logo {
-      position: absolute;
-      left: 20px;
-    }
-    .logo img {
-      height: 50px;
-      width: auto;
-    }
-    nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      gap: 100px; /* 메뉴 간격 */
-    }
-    nav ul li {
-      display: inline;
-    }
-    nav ul li a {
-      text-decoration: none;
-      color: #333;
-      font-size: 16px;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-    nav ul li a:hover {
-      color: #007BFF;
-      border-bottom: 2px solid #007BFF;
-      padding-bottom: 4px;
-    }
-    .video-section {
-      position: relative;
-      background: black;
-    }
-    .video-section video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .video-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.5);
-    }
-    .video-overlay h1 {
-      color: white;
-      font-size: 48px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    }
-    .image-section {
-      position: relative;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-    .image-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.4); /* 이미지 위에 반투명 오버레이 */
-    }
-    .image-overlay h1 {
-      color: white;
-      font-size: 36px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLAN ANUE</title> <!-- 웹사이트 제목 설정 -->
+    <style>
+        body {
+            margin: 0; /* 기본 여백 제거 */
+            color: white; /* 텍스트 색상 설정 */
+            font-family: Arial, sans-serif; /* 기본 글꼴 설정 */
+            background-color: #2c3e50; /* 배경 색상 설정 */
+        }
+
+        header {
+            display: flex; /* 요소를 플렉스 박스로 설정 */
+            justify-content: space-between; /* 공간을 조정 */
+            align-items: center; /* 중앙 정렬 */
+            padding: 20px; /* 여백 설정 */
+            background-color: rgba(44, 62, 80, 0.9); /* 배경색 설정 */
+        }
+
+        .logo img {
+            max-height: 100px; /* 로고 최대 높이 설정 */
+            cursor: pointer; /* 포인터 모양 설정 */
+        }
+
+        nav {
+            display: flex; /* 수평으로 메뉴 표시 */
+        }
+
+        nav a {
+            color: white; /* 글자색 설정 */
+            text-align: center; /* 텍스트 가운데 정렬 */
+            padding: 14px 20px; /* 패딩 설정 */
+            text-decoration: none; /* 밑줄 제거 */
+        }
+
+        nav a:hover {
+            background-color: #3498db; /* 호버 시 배경색 변경 */
+            color: white; /* 호버 시 글자색 유지 */
+        }
+
+        .social-icons {
+            display: flex; /* 아이콘을 수평으로 배치 */
+            gap: 10px; /* 아이콘 간격 설정 */
+        }
+
+        .social-icons img {
+            max-height: 30px; /* 아이콘 최대 높이 설정 */
+            cursor: pointer; /* 포인터 모양 설정 */
+        }
+
+        main {
+            padding: 20px; /* 메인 콘텐츠 여백 설정 */
+        }
+
+        section {
+            margin: 40px 0; /* 섹션 간격 설정 */
+            padding: 20px; /* 섹션 내 여백 */
+            background-color: rgba(255, 255, 255, 0.1); /* 섹션 배경색 */
+            border-radius: 8px; /* 둥근 모서리 */
+        }
+
+        h2 {
+            margin-top: 0; /* 제목 상단 여백 제거 */
+        }
+
+        h1 {
+            text-align: center; /* 제목 가운데 정렬 */
+            color: #3498db; /* 홈페이지 이름 색상 설정 */
+        }
+    </style>
 </head>
+
 <body>
-  <header>
-    <!-- 로고 -->
-    <div class="logo">
-      <img src="logo.png" alt="로고 이미지">
-    </div>
-    <nav>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#work">Work</a></li>
-      </ul>
-    </nav>
-  </header>
-  
-  <div class="container" id="container">
-    <!-- 첫 번째 섹션: 동영상 -->
-    <section class="video-section">
-      <video autoplay muted loop>
-        <source src="your-video.mp4" type="video/mp4">
-        동영상을 지원하지 않는 브라우저입니다.
-      </video>
-      <div class="video-overlay">
-        <h1>기업의 비전과 가치를 담은 메시지</h1>
-      </div>
-    </section>
-    
-    <!-- 두 번째 섹션: 이미지 배경 -->
-    <section class="image-section" style="background-image: url('image1.jpg');">
-      <div class="image-overlay">
-        <h1>두 번째 섹션 콘텐츠</h1>
-      </div>
-    </section>
-    
-    <!-- 세 번째 섹션: 이미지 배경 -->
-    <section class="image-section" style="background-image: url('image2.jpg');">
-      <div class="image-overlay">
-        <h1>세 번째 섹션 콘텐츠</h1>
-      </div>
-    </section>
-  </div>
 
-  <script>
-    const container = document.getElementById('container');
-    const sections = document.querySelectorAll('section');
-    let currentSection = 0;
+    <header>
+        <div class="logo" onclick="document.getElementById('home').scrollIntoView();">
+            <img src="[https://drive.google.com/uc?export=view&id=1Fvq1tI2ed6P3KgogaAGhXUTva6-6M1nK](https://drive.google.com/uc?export=view&id=1Fvq1tI2ed6P3KgogaAGhXUTva6-6M1nK)" alt="PLAN ANUE 로고">
+        </div>
 
-    // 키보드로 섹션 슬라이드
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowDown') {
-        navigateSection(1);
-      } else if (e.key === 'ArrowUp') {
-        navigateSection(-1);
-      }
-    });
+        <nav>
+            <a href="#about">ABOUT</a>
+            <a href="#work">WORK</a>
+            <a href="#archive">ARCHIVE</a>
+            <a href="#contact">CONTACT</a>
+        </nav>
 
-    function navigateSection(direction) {
-      const maxSections = sections.length;
-      const nextSection = currentSection + direction;
+        <div class="social-icons">
+            <a href="[https://www.instagram.com/plananue](https://www.instagram.com/plananue)" target="_blank">
+                <img src="[https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png](https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png)" alt="Instagram">
+            </a>
+            <a href="[https://pf.kakao.com/your_channel](https://pf.kakao.com/your_channel)" target="_blank">
+                <img src="[https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/KakaoTalk_logo.svg/1024px-KakaoTalk_logo.svg.png](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/KakaoTalk_logo.svg/1024px-KakaoTalk_logo.svg.png)" alt="KakaoTalk Channel">
+            </a>
+            <a href="[https://www.youtube.com/your_channel](https://www.youtube.com/your_channel)" target="_blank">
+                <img src="[https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png](https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png)" alt="YouTube">
+            </a>
+        </div>
+    </header>
 
-      if (nextSection >= 0 && nextSection < maxSections) {
-        currentSection = nextSection;
-        container.style.transform = `translateY(-${currentSection * 100}vh)`;
-      }
-    }
-  </script>
+    <main>
+        <section id="home">
+            <h1>PLAN ANUE</h1> <!-- 홈페이지 이름 표시 -->
+            <p>여기에 홈페이지의 간단한 소개 내용을 작성하세요. 이 섹션은 홈페이지에 대한 개요나 환영 메시지를 포함할 수 있습니다.</p>
+        </section>
+
+        <section id="about">
+            <h2>ABOUT</h2>
+            <p>여기에 회사 또는 웹사이트에 대한 소개 내용을 작성하십시오. 서비스나 제품에 대한 설명도 포함할 수 있습니다.</p>
+        </section>
+
+        <section id="work">
+            <h2>WORK</h2>
+            <p>여기에 프로젝트나 작업 사례를 소개하십시오. 수행한 작업의 상세 내용 및 결과를 나열할 수 있습니다.</p>
+        </section>
+
+        <section id="archive">
+            <h2>ARCHIVE</h2>
+            <p>과거 프로젝트나 사례를 정리하여 보여주는 공간입니다. 이 섹션에서는 이전 작업에 대한 정보 및 기록을 소개할 수 있습니다.</p>
+        </section>
+
+        <section id="contact">
+            <h2>CONTACT</h2>
+            <form>
+                <label for="name">이름:</label><br>
+                <input type="text" id="name" name="name" required><br><br>
+
+                <label for="message">메시지:</label><br>
+                <textarea id="message" name="message" rows="4" required></textarea><br><br>
+
+                <input type="submit" value="제출">
+            </form>
+        </section>
+    </main>
+
 </body>
+
 </html>
