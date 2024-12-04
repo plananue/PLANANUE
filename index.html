@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLAN ANUE</title> <!-- 웹사이트 제목 설정 -->
+    <title>PLAN ANUE</title>
     <style>
         body {
             margin: 0; /* 기본 여백 제거 */
             color: white; /* 텍스트 색상 설정 */
             font-family: Arial, sans-serif; /* 기본 글꼴 설정 */
             background-color: #2c3e50; /* 배경 색상 설정 */
+            overflow: hidden; /* 스크롤 제거 */
         }
 
         header {
@@ -35,6 +36,7 @@
             text-align: center; /* 텍스트 가운데 정렬 */
             padding: 14px 20px; /* 패딩 설정 */
             text-decoration: none; /* 밑줄 제거 */
+            margin: 0 50px; /* 좌우 간격을 100픽셀로 설정 */
         }
 
         nav a:hover {
@@ -52,24 +54,28 @@
             cursor: pointer; /* 포인터 모양 설정 */
         }
 
-        main {
-            padding: 20px; /* 메인 콘텐츠 여백 설정 */
+        #main-image-container {
+            display: flex; /* 플렉스 박스를 사용하여 이미지를 가로로 정렬 */
+            height: 100vh; /* 전체 화면 높이 */
+            transition: transform 1s ease-in-out; /* 이미지 전환 애니메이션 */
+            position: relative; /* 마지막 이미지의 위치 설정 */
         }
 
-        section {
-            margin: 40px 0; /* 섹션 간격 설정 */
-            padding: 20px; /* 섹션 내 여백 */
-            background-color: rgba(255, 255, 255, 0.1); /* 섹션 배경색 */
-            border-radius: 8px; /* 둥근 모서리 */
+        .main-image {
+            min-width: 100%; /* 각 이미지가 화면 전체를 차지하도록 설정 */
+            height: auto; /* 비율 유지 */
+            position: absolute; /* 이미지 절대 위치 설정 */
+            top: 0;
+            left: 0;
         }
 
-        h2 {
-            margin-top: 0; /* 제목 상단 여백 제거 */
+        .fade {
+            opacity: 0; /* 초기 투명도 설정 */
+            transition: opacity 1s ease-in-out; /* 투명도 전환 애니메이션 */
         }
 
-        h1 {
-            text-align: center; /* 제목 가운데 정렬 */
-            color: #3498db; /* 홈페이지 이름 색상 설정 */
+        .visible {
+            opacity: 1; /* 보이는 상태 설정 */
         }
     </style>
 </head>
@@ -77,19 +83,19 @@
 <body>
 
     <header>
-        <div class="logo" onclick="document.getElementById('home').scrollIntoView();">
+        <div class="logo" onclick="scrollToImage(0);">
             <img src="[https://drive.google.com/uc?export=view&id=1Fvq1tI2ed6P3KgogaAGhXUTva6-6M1nK](https://drive.google.com/uc?export=view&id=1Fvq1tI2ed6P3KgogaAGhXUTva6-6M1nK)" alt="PLAN ANUE 로고">
         </div>
 
         <nav>
-            <a href="#about">ABOUT</a>
-            <a href="#work">WORK</a>
-            <a href="#archive">ARCHIVE</a>
-            <a href="#contact">CONTACT</a>
+            <a href="[https://example.com/about](https://example.com/about)" target="_blank">ABOUT</a>
+            <a href="[https://example.com/work](https://example.com/work)" target="_blank">WORK</a>
+            <a href="[https://example.com/archive](https://example.com/archive)" target="_blank">ARCHIVE</a>
+            <a href="[https://example.com/contact](https://example.com/contact)" target="_blank">CONTACT</a>
         </nav>
 
         <div class="social-icons">
-            <a href="[https://www.instagram.com/plananue](https://www.instagram.com/plananue)" target="_blank">
+            <a href="[https://www.instagram.com/your_account](https://www.instagram.com/your_account)" target="_blank">
                 <img src="[https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png](https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png)" alt="Instagram">
             </a>
             <a href="[https://pf.kakao.com/your_channel](https://pf.kakao.com/your_channel)" target="_blank">
@@ -101,40 +107,133 @@
         </div>
     </header>
 
-    <main>
-        <section id="home">
-            <h1>PLAN ANUE</h1> <!-- 홈페이지 이름 표시 -->
-            <p>여기에 홈페이지의 간단한 소개 내용을 작성하세요. 이 섹션은 홈페이지에 대한 개요나 환영 메시지를 포함할 수 있습니다.</p>
-        </section>
+    <div id="main-image-container">
+        <img class="main-image fade" src="[https://example.com/image1.jpg](https://example.com/image1.jpg)" alt="이미지 1"> <!-- 첫 번째 이미지 URL -->
+        <img class="main-image fade" src="[https://example.com/image2.jpg](https://example.com/image2.jpg)" alt="이미지 2"> <!-- 두 번째 이미지 URL -->
+        <img class="main-image fade" src="[https://example.com/image3.jpg](https://example.com/image3.jpg)" alt="이미지 3"> <!-- 세 번째 이미지 URL -->
+    </div>
 
-        <section id="about">
-            <h2>ABOUT</h2>
-            <p>여기에 회사 또는 웹사이트에 대한 소개 내용을 작성하십시오. 서비스나 제품에 대한 설명도 포함할 수 있습니다.</p>
-        </section>
+    <script>
+        let currentIndex = 0; 
+        const images = document.querySelectorAll('.main-image');
+        const totalImages = images.length;
 
-        <section id="work">
-            <h2>WORK</h2>
-            <p>여기에 프로젝트나 작업 사례를 소개하십시오. 수행한 작업의 상세 내용 및 결과를 나열할 수 있습니다.</p>
-        </section>
+        function updateImages() {
+            images.forEach((image, index) => {
+                image.classList.remove('visible'); // 모든 이미지에서 visible 클래스 제거
+            });
+            images[currentIndex].classList.add('visible'); // 현재 이미지에만 visible 클래스 추가
+            images[currentIndex].style.opacity = '1'; // 현재 이미지를 보여준다
 
-        <section id="archive">
-            <h2>ARCHIVE</h2>
-            <p>과거 프로젝트나 사례를 정리하여 보여주는 공간입니다. 이 섹션에서는 이전 작업에 대한 정보 및 기록을 소개할 수 있습니다.</p>
-        </section>
+            // 이전 이미지를 흐리게 한다
+            const previousIndex = 
+c
+u
+r
+r
+e
+n
+t
+I
+n
+d
+e
+x
+−
+1
++
+t
+o
+t
+a
+l
+I
+m
+a
+g
+e
+s
+currentIndex−1+totalImages % totalImages;
+            images[previousIndex].style.opacity = '0'; 
+        }
 
-        <section id="contact">
-            <h2>CONTACT</h2>
-            <form>
-                <label for="name">이름:</label><br>
-                <input type="text" id="name" name="name" required><br><br>
+        function changeImage() {
+            currentIndex = 
+c
+u
+r
+r
+e
+n
+t
+I
+n
+d
+e
+x
++
+1
+currentIndex+1 % totalImages; // 다음 인덱스 설정
+            updateImages();
+        }
 
-                <label for="message">메시지:</label><br>
-                <textarea id="message" name="message" rows="4" required></textarea><br><br>
+        // 자동 이미지 전환
+        setInterval(changeImage, 5000); // 5초마다 이미지 변경
 
-                <input type="submit" value="제출">
-            </form>
-        </section>
-    </main>
+        // 스크롤 시 이미지 전환
+        document.addEventListener('wheel', (event) => {
+            if (event.deltaY > 0) {
+                currentIndex = 
+c
+u
+r
+r
+e
+n
+t
+I
+n
+d
+e
+x
++
+1
+currentIndex+1 % totalImages; // 아래로 스크롤
+            } else {
+                currentIndex = 
+c
+u
+r
+r
+e
+n
+t
+I
+n
+d
+e
+x
+−
+1
++
+t
+o
+t
+a
+l
+I
+m
+a
+g
+e
+s
+currentIndex−1+totalImages % totalImages; // 위로 스크롤
+            }
+            updateImages();
+        });
+
+        window.onload = updateImages; // 페이지 로드 시 첫 이미지 표시
+    </script>
 
 </body>
 
