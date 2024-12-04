@@ -81,6 +81,18 @@
         .visible {
             opacity: 1; /* 보이는 상태 설정 */
         }
+
+        .image-index {
+            position: fixed; /* 고정된 위치 설정 */
+            right: 20px; /* 오른쪽 간격 */
+            top: 50%; /* 중간 정렬 */
+            transform: translateY(-50%); /* 수직 중앙 정렬 */
+            font-size: 24px; /* 글자 크기 설정 */
+            color: black; /* 글자색 설정 */
+            background-color: rgba(255, 255, 255, 0.7); /* 배경색 반투명 흰색으로 설정 */
+            padding: 10px; /* 여백 설정 */
+            border-radius: 5px; /* 모서리 둥글게 */
+        }
     </style>
 </head>
 
@@ -88,7 +100,7 @@
 
     <header>
         <a href="index.html" class="logo"> <!-- 로고 클릭 시 index.html 페이지로 이동 -->
-            <img src="[https://drive.google.com/uc?export=view&id=1wHxxh48ejkYk0DfRKYhUj0TpnbNoyRKo](https://drive.google.com/uc?export=view&id=1wHxxh48ejkYk0DfRKYhUj0TpnbNoyRKo)" alt="PLAN ANUE 로고">
+            <img src="[https://i.ibb.co/NxcVVky/image.png](https://i.ibb.co/NxcVVky/image.png)" alt="image" border="0"> <!-- 로고 이미지 변경 -->
         </a>
 
         <nav>
@@ -112,15 +124,18 @@
     </header>
 
     <div id="main-image-container">
-        <img class="main-image fade" src="[https://drive.google.com/uc?export=view&id=1rJFm9ZiP9LnHuMx7VAi76sOolS65I2aa](https://drive.google.com/uc?export=view&id=1rJFm9ZiP9LnHuMx7VAi76sOolS65I2aa)" alt="이미지 1"> <!-- 첫 번째 이미지 URL 변경 -->
+        <img class="main-image fade" src="[https://drive.google.com/uc?export=view&id=1rJFm9ZiP9LnHuMx7VAi76sOolS65I2aa](https://drive.google.com/uc?export=view&id=1rJFm9ZiP9LnHuMx7VAi76sOolS65I2aa)" alt="이미지 1"> <!-- 첫 번째 이미지 URL -->
         <img class="main-image fade" src="[https://example.com/image2.jpg](https://example.com/image2.jpg)" alt="이미지 2"> <!-- 두 번째 이미지 URL -->
         <img class="main-image fade" src="[https://example.com/image3.jpg](https://example.com/image3.jpg)" alt="이미지 3"> <!-- 세 번째 이미지 URL -->
     </div>
+
+    <div class="image-index" id="imageIndex">1 / 3</div> <!-- 현재 이미지 번호 표시 -->
 
     <script>
         let currentIndex = 0; 
         const images = document.querySelectorAll('.main-image');
         const totalImages = images.length;
+        const imageIndexDisplay = document.getElementById('imageIndex'); // 이미지 인덱스 표시 요소
 
         function updateImages() {
             images.forEach((image, index) => {
@@ -159,6 +174,9 @@ e
 s
 currentIndex−1+totalImages % totalImages;
             images[previousIndex].style.opacity = '0'; 
+
+            // 이미지 인덱스 업데이트
+            imageIndexDisplay.textContent = `${currentIndex + 1} / ${totalImages}`;
         }
 
         function changeImage() {
